@@ -3,6 +3,18 @@ locals {
   local_subnet = "https://www.googleapis.com/compute/v1/projects/teck-dev-ingestion/regions/us-central1/subnetworks/teck-dev-ingestion-internal-project-network"
 }
 
+
+terraform {
+  backend "remote" {
+    hostname      = "app.terraform.io"
+    organization  = "Sunil_Teck"
+
+    workspaces {
+      name = "tfc-gcp"
+    }
+  }
+}
+
 resource "google_compute_instance" "default" {
   project      = var.project_id.prod
   zone         = "us-central1-a"
